@@ -35,7 +35,7 @@ module.exports.getAuthURL = async () => {
       authUrl,
     }),
   };
-}
+};
 
 module.exports.getAccessToken = async (event) => {
   // Decode authorization code extracted from the URL query
@@ -72,7 +72,7 @@ module.exports.getAccessToken = async (event) => {
         body: JSON.stringify(error),
       };
     });
-}
+};
 //Step 2: Outline your getCalendarEvents() function in your handler.js file
 module.exports.getCalendarEvents = async (event) => {
   const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
