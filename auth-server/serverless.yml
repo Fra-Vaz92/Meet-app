@@ -17,20 +17,20 @@ functions:
   getAuthURL:
     handler: handler.getAuthURL
     events:
-      - httpApi:
-          path: /api/get-auth-url
+      - http:
+          path: api/get-auth-url
           method: get
 
   getAccessToken:
     handler: handler.getAccessToken
     events:
-      - httpApi:
-          path: /api/token/{code}
+      - http:
+          path: api/token/{code}
           method: get
 
   getCalendarEvents:
     handler: handler.getCalendarEvents
     events:
-      - httpApi:
-          path: /api/get-events/{access_token}
+      - http:
+          path: api/get-events/{access_token}
           method: get
