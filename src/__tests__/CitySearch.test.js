@@ -3,6 +3,7 @@
 import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { extractLocations, getEvents } from '../api';
+import App from '../App';
 import CitySearch from '../components/CitySearch';
 
 describe('<CitySearch /> component', () => {
@@ -86,4 +87,23 @@ describe('<CitySearch /> integration', () => {
     const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem');
     expect(suggestionListItems.length).toBe(allLocations.length + 1);
   });
-})
+
+
+  test('renders the suggestion text in the textbox upon clicking on the suggestion', async () => {
+
+    let CitySearchComponent = render(<CitySearch allLocations={[]}/>);
+    const user = userEvent.setup();
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+  
+    const cityTextBox = CitySearchComponent.queryByRole('textbox');
+    await user.type(cityTextBox, "Berlin");
+  
+    const BerlinGermanySuggestion = CitySearchComponent.queryAllByRole('listitem')[0];
+    await user.click(BerlinGermanySuggestion);
+  
+    expect(cityTextBox).toHaveValue("Berlin, Germany");
+  });
+  
+  });
