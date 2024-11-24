@@ -4,6 +4,8 @@ import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
 import { useEffect, useState } from 'react';
 import { extractLocations, getEvents } from './api';
+import { InfoAlert, ErrorAlert  } from './components/Alert';
+import logo from "./assets/meet_logo_app.png";
 import './App.css';
 
 function App() {
@@ -11,7 +13,8 @@ function App() {
   const [currentNOE, setCurrentNOE] = useState(32);
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
-  const [errorAlert, setErrorAlert] = useState("");
+  const [infoAlert, setInfoAlert] = useState("");
+  const [ErrorAlert, setErrorAlert] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -23,19 +26,27 @@ function App() {
       allEvents : allEvents.filter(event => event.location === currentCity)
     setEvents(filteredEvents.slice(0, currentNOE));
     setAllLocations(extractLocations(allEvents));
-  }
+};
 
   return (
-    <div className="App">
-      <CitySearch allLocations={allLocations} 
-        setCurrentCity={setCurrentCity}/>
-      <EventList events={events} />
-      <NumberOfEvents 
-        setErrorAlert={setErrorAlert}
-        currentNOE={currentNOE}
-        setCurrentNOE={setCurrentNOE}
-      />
-    </div>
+      <div className="App">
+        <header className="logo">
+        <img src={logo} alt="Meet app logo"/>
+        </header>
+        <div className="alerts-container">
+          {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
+          {ErrorAlert.length ? <ErrorAlert text={ErrorAlert} /> : null}
+        </div>
+        <CitySearch
+          allLocations={allLocations}
+          setCurrentCity={setCurrentCity}
+          setInfoAlert={setInfoAlert}
+          />
+        <NumberOfEvents
+        setCurrentNOE={setCurrentNOE} 
+        setErrorAlert={setErrorAlert}/>
+        <EventList events={events} />
+      </div>
   );
 }
 

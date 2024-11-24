@@ -103,3 +103,11 @@ input[type="number"] {
   padding: 1rem;
   margin-bottom: 0.8rem;
 }
+
+.alerts-container {
+  position: fixed;
+  top: 0px;
+  left: 20px;
+  width: 250px;
+  z-index: 1000;
+}
