@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 /* eslint-disable testing-library/no-render-in-setup */
 import NumberOfEvents from '../components/NumberOfEvents';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getEvents } from "../api";
 
@@ -38,11 +38,34 @@ describe('<NumberOfEvents /> Component', () => {
     });
     
     test('change number of events when a user types in the textbox', async () => { 
-        const numverOfEvents = NumberOfEventsComponent.getByRole('textbox');
+        const numberOfEvents = NumberOfEventsComponent.getByRole('textbox');
         const user = userEvent.setup(); 
-        await user.type(numverOfEvents, '{backspace}{backspace}10');   
+        await user.type(numberOfEvents, '{backspace}{backspace}10');   
         const allEvents = await getEvents(); 
         NumberOfEventsComponent.rerender(<NumberOfEvents setCurrentNOE={allEvents} setErrorAlert={() => {}} />);   
-        expect(numverOfEvents).toHaveValue('10'); 
+        expect(numberOfEvents).toHaveValue('10'); 
       }); 
+
+      test('should call setErrorAlert with error text when 0 is added to the input field', async () => {
+        const setErrorAlertMock = jest.fn();
+        NumberOfEventsComponent.rerender(<NumberOfEvents setCurrentNOE={() => { }} setErrorAlert={setErrorAlertMock} />)
+
+        const user = userEvent.setup();
+
+        await user.type(screen.queryByLabelText('Number of Events:'), '{backspace}{backspace}0');
+
+        expect(setErrorAlertMock).toHaveBeenLastCalledWith('Only positive numbers are allowed')
+    })
+
+    test('should call setErrorAlert with error text when negative number is added to the input field', async () => {
+        const setErrorAlertMock = jest.fn();
+        NumberOfEventsComponent.rerender(<NumberOfEvents setCurrentNOE={() => { }} setErrorAlert={setErrorAlertMock} />)
+
+        const user = userEvent.setup();
+
+        await user.type(screen.queryByLabelText('Number of Events:'), '{backspace}{backspace}-5');
+
+        expect(setErrorAlertMock).toHaveBeenLastCalledWith('Only positive numbers are allowed')
+    })  
+
 });
