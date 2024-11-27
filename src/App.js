@@ -19,10 +19,11 @@ function App() {
   useEffect(() => {
     let warningText = "";
     if(navigator.onLine) {
-      warningText = "Your are offline. The displayed list has been loaded from the cache";
+      warningText = ""
     }else{
-      setWarningAlert(warningText);
+    warningText="Your are offline. The displayed list has been loaded from the cache"
     }
+    setWarningAlert(warningText);
     fetchData();
   }, [currentCity, currentNOE]);
 
