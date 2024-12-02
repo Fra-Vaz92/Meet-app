@@ -118,7 +118,3 @@ input[type="number"] {
     margin-left: 0rem;
     margin-right: 0rem;
   }}
-
-  .charts-container {
-    grid-template-columns: 1fr;
-  }
