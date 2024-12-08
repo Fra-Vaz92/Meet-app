@@ -23,17 +23,17 @@ const EventGenresChart = ({ events }) => {
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
   const RADIAN = Math.PI / 180;
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const radius = outerRadius;;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN)*1.07;
+  const y = cy + radius * Math.sin(-midAngle * RADIAN)*1.07;
 
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${(percent * 100).toFixed(0)}%`}
+  return percent ?(
+    <text x={x} y={y} fill="#8884d8" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${genres[index]} ${(percent * 100).toFixed(0)}%`}
     </text>
-  );
+  ):null;
 };
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#DD0000', '#00DD00', '#0000DD', '#DDDD00', '#DD00DD'];
 
     return (
       <ResponsiveContainer width="99%" height={400}>

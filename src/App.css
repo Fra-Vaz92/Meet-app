@@ -4,10 +4,6 @@
   padding: 2% 5%;
 }
 
-.App * {
-  box-sizing: border-box;
-}
-
 ul {
   padding: 0;
   list-style: none;
@@ -31,7 +27,14 @@ input[type="number"] {
 }
 
 .city {
-  width: 250px;
+  border-radius: 10px;
+    font-size: 14px;
+    height: 50px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    padding: 16px 12px 16px 20px;
+    width: 100%;
 }
 
 #city-search {
@@ -42,20 +45,19 @@ input[type="number"] {
 }
 
 .suggestions {
-  width: 250px;
-  position: absolute;
-  top: 45px;
-  z-index: 2;
-  align-self: center;
-  margin: 0;
+  border-radius: 10px;
   font-size: 14px;
+  outline: none;
+  width: 100%;
+  top: 42px;
+  position: absolute;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
 }
 
 .suggestions > li {
   text-align: left;
   padding: 8px 6px 8px 10px;
-  background-color: #eee;
+  background-color: #ffffff;
   cursor: default;
 }
 
@@ -76,6 +78,7 @@ input[type="number"] {
   border-radius: 4px;
   position: relative;
 }
+
 
 .details-btn {
   position: absolute;
@@ -118,3 +121,40 @@ input[type="number"] {
     margin-left: 0rem;
     margin-right: 0rem;
   }}
+
+
+ #event-list li{
+    text-align: left;
+    border: 2px solid;
+  border: 2px solid;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  padding: 10px 40px 30px;
+  }
+
+  .show-details-btn{
+    background-color: #219ebc;
+    border-radius: 4px;
+    border-radius: 20px;
+    color: #fff;
+    color: var(--text-color);
+    outline: none;
+    padding: 10px;
+    transition: opacity .2s;
+
+  }
+
+  #number-of-events{
+    position: absolute;
+    right: 86px;
+    margin-top: 20px;
+  }
+
+  .charts-container{
+    grid-template-columns: 1fr;
+    margin-top: 100px;
+  }
+
+  .recharts-responsive-container{
+    margin-bottom: 50px;
+  }
