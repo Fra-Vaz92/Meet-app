@@ -37,7 +37,7 @@ const COLORS = ['#DD0000', '#00DD00', '#0000DD', '#DDDD00', '#DD00DD'];
 
     return (
       <ResponsiveContainer width="99%" height={400}>
-        <PieChart margin={{top: 40,bottom: 80}}>
+        <PieChart >
           <Pie
          data={data}
          dataKey="value"
